@@ -1,0 +1,11 @@
+name: LunixDev
+version: '${project.version}'
+main: me.lunaiskey.lunixdev.LunixDev
+api-version: 1.18
+authors: [ Lunaiskey ]
+description: Some RPG Server I guess.
+commands:
+  litem:
+    usage: /<command>
+  craft:
+    usage: /<command>
