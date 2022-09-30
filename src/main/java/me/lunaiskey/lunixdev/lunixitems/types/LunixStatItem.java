@@ -1,7 +1,5 @@
-package me.lunaiskey.lunixdev.lunixitems.items;
+package me.lunaiskey.lunixdev.lunixitems.types;
 
-import me.lunaiskey.lunixdev.lunixitems.LunixItem;
-import me.lunaiskey.lunixdev.lunixitems.LunixItemType;
 import me.lunaiskey.lunixdev.lunixitems.Rarity;
 import org.bukkit.Material;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -11,9 +9,16 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.List;
 
-public class DadsAshes extends LunixItem {
-    public DadsAshes() {
-        super(LunixItemType.DADS_ASHES, "&FDad's Ashes", List.of("&7&oGreat mixed with milk!"), Rarity.JUNK, Material.GUNPOWDER);
+public class LunixStatItem extends LunixItem {
+    private Stats stats;
+
+    public LunixStatItem(String itemID, String name, List<String> description, Rarity rarity, Material material, Stats stats) {
+        super(itemID, name, description, rarity, material);
+        this.stats = stats;
+    }
+
+    public Stats getStats() {
+        return stats;
     }
 
     @Override

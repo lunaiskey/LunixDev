@@ -1,11 +1,17 @@
 name: LunixDev
 version: '${project.version}'
 main: me.lunaiskey.lunixdev.LunixDev
-api-version: 1.18
+api-version: 1.19
 authors: [ Lunaiskey ]
 description: Some RPG Server I guess.
+softdepend:
+  - Vault
 commands:
   litem:
     usage: /<command>
-  craft:
+  lcraft:
+    usage: /<command>
+  lshop:
+    usage: /<command>
+  lenchant:
     usage: /<command>

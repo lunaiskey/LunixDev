@@ -3,6 +3,7 @@ package me.lunaiskey.lunixdev.lunixitems;
 import org.bukkit.ChatColor;
 
 public enum Rarity {
+    NO_RARITY('r'),
     JUNK('7'),
     COMMON('f'),
     UNCOMMON('a'),
@@ -12,7 +13,7 @@ public enum Rarity {
     MYTHIC('d'),
     ;
 
-    private ChatColor color;
+    private final ChatColor color;
     Rarity(char color) {
         this.color = ChatColor.getByChar(color);
     }

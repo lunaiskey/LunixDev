@@ -1,7 +1,6 @@
 package me.lunaiskey.lunixdev.lunixitems.items;
 
-import me.lunaiskey.lunixdev.lunixitems.LunixItem;
-import me.lunaiskey.lunixdev.lunixitems.LunixItemType;
+import me.lunaiskey.lunixdev.lunixitems.types.LunixItem;
 import me.lunaiskey.lunixdev.lunixitems.Rarity;
 import org.bukkit.Material;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class DragonCum extends LunixItem {
     public DragonCum() {
-        super(LunixItemType.DRAGON_CUM, "Dragon Cum", List.of("&7&oWhat do you think","&7&othat projectile was?"), Rarity.EPIC, Material.DRAGON_BREATH);
+        super("DRAGON_CUM", "Dragon Cum", List.of("&7&oWhat do you think","&7&othat projectile was?"), Rarity.EPIC, Material.DRAGON_BREATH);
     }
 
     @Override

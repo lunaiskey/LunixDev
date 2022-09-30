@@ -1,21 +1,16 @@
 package me.lunaiskey.lunixdev.lunixrecipes;
 
-import it.unimi.dsi.fastutil.ints.IntList;
+
 import me.lunaiskey.lunixdev.inventories.craftingrelated.LunixCraftingInv;
-import me.lunaiskey.lunixdev.lunixitems.LunixItemType;
-import me.lunaiskey.lunixdev.lunixrecipes.LunixRecipe;
-import me.lunaiskey.lunixdev.utils.NBTUtil;
 import org.apache.commons.lang.Validate;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapelessRecipe;
 
 import java.util.*;
 
 public class LunixShapelessRecipe implements LunixRecipe {
-    private ShapelessRecipe ref1;
-    private net.minecraft.world.item.crafting.ShapelessRecipe ref3;
+    private ShapelessRecipe ref0;
+    private net.minecraft.world.item.crafting.ShapelessRecipe ref1;
 
     private ItemStack result;
     private List<LunixRecipeChoice> ingredients = new ArrayList<>();
@@ -24,10 +19,10 @@ public class LunixShapelessRecipe implements LunixRecipe {
         this.result = result;
     }
 
-    public LunixShapelessRecipe addIngredients(int count, LunixItemType type, int itemAmount) {
+    public LunixShapelessRecipe addIngredients(int count, String itemID, int itemAmount) {
         Validate.isTrue(ingredients.size() + count <= 9, "Shapeless recipes cannot have more than 9 ingredients");
         while (count-- > 0) {
-            ingredients.add(new LunixRecipeChoice(type,itemAmount));
+            ingredients.add(new LunixRecipeChoice(itemID,itemAmount));
         }
         return this;
     }

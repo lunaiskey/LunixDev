@@ -1,4 +1,6 @@
-package me.lunaiskey.lunixdev.lunixitems;
+package me.lunaiskey.lunixdev.lunixitems.types;
+
+import me.lunaiskey.lunixdev.lunixitems.StatType;
 
 public class Stats {
 
@@ -22,6 +24,7 @@ public class Stats {
         return switch(type) {
             case STRENGTH -> getStrength();
             case DEFENCE -> getDefence();
+            default -> 0.0;
         };
     }
 }

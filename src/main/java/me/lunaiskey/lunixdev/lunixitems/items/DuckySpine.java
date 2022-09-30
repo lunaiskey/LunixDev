@@ -1,8 +1,7 @@
 package me.lunaiskey.lunixdev.lunixitems.items;
 
-import me.lunaiskey.lunixdev.lunixitems.LunixItem;
-import me.lunaiskey.lunixdev.lunixitems.LunixItemType;
 import me.lunaiskey.lunixdev.lunixitems.Rarity;
+import me.lunaiskey.lunixdev.lunixitems.types.LunixItem;
 import org.bukkit.Material;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -11,9 +10,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.List;
 
-public class CoalOre extends LunixItem {
-    public CoalOre() {
-        super(LunixItemType.COAL_ORE, "&fCoal Ore", List.of("&7&oFull of Carbon!"), Rarity.COMMON, Material.COAL_ORE);
+public class DuckySpine extends LunixItem {
+    public DuckySpine() {
+        super("DUCKY_SPINE", "Ducky's Spine", List.of("&7&oWas found while excavating","&7&oan old prison."), Rarity.EPIC, Material.BONE, true);
     }
 
     @Override

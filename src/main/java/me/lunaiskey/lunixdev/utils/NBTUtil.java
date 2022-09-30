@@ -1,11 +1,11 @@
 package me.lunaiskey.lunixdev.utils;
 
-import me.lunaiskey.lunixdev.lunixitems.LunixItemType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_18_R2.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_19_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
@@ -13,12 +13,12 @@ public class NBTUtil {
 
     private static final String lunixDataID = "LunixData";
 
-    public static CompoundTag getBaseTagContainer(ItemStack item) {
+    public static CompoundTag getBaseCompoundTag(ItemStack item) {
         net.minecraft.world.item.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         return nmsStack.getOrCreateTag();
     }
 
-    public static ItemStack addCustomTagContainer(ItemStack item, String containerName, CompoundTag tag) {
+    public static ItemStack addCustomCompoundToBaseCompound(ItemStack item, String containerName, CompoundTag tag) {
         net.minecraft.world.item.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         CompoundTag itemTag = nmsStack.getOrCreateTag();
         itemTag.put(containerName,tag);
@@ -36,7 +36,13 @@ public class NBTUtil {
         return itemTag.contains(containerName);
     }
 
-    public static ItemStack addLunixDataContainer(ItemStack item) {
+    public static ItemStack setBaseCompoundTag(ItemStack item, CompoundTag tag) {
+        net.minecraft.world.item.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+        nmsStack.setTag(tag);
+        return CraftItemStack.asBukkitCopy(nmsStack);
+    }
+
+    public static ItemStack addLunixDataCompoundTag(ItemStack item) {
         net.minecraft.world.item.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         CompoundTag itemTag = nmsStack.getOrCreateTag();
         CompoundTag pyrexDataTag = new CompoundTag();
@@ -49,7 +55,7 @@ public class NBTUtil {
     }
 
     public static ItemStack addLunixData(ItemStack item, String identifier, Object value) {
-        item = addLunixDataContainer(item);
+        item = addLunixDataCompoundTag(item);
         net.minecraft.world.item.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         CompoundTag itemTag = nmsStack.getOrCreateTag();
         CompoundTag lunixDataTag = itemTag.getCompound(NBTUtil.lunixDataID);
@@ -101,22 +107,27 @@ public class NBTUtil {
         return new CompoundTag();
     }
 
-    public static ItemStack addLunixID(ItemStack item, String ID) {
-        return addLunixData(item,"id",ID);
+    public static ItemStack setLunixDataContainer(ItemStack item, CompoundTag lunixDataContainer) {
+        net.minecraft.world.item.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+        CompoundTag itemTag = nmsStack.getOrCreateTag();
+        itemTag.put(lunixDataID,lunixDataContainer);
+        return CraftItemStack.asBukkitCopy(nmsStack);
     }
 
-    public static LunixItemType getLunixID(ItemStack item) {
-        if (item == null) {
-            return null;
-        }
+    public static ItemStack addLunixID(ItemStack item, String ID) {
+        return addLunixData(item,"id",ID.toUpperCase());
+    }
+
+    @NotNull
+    public static String getLunixID(@NotNull ItemStack item) {
         if (item.getType() == Material.AIR) {
-            return LunixItemType.AIR;
+            return item.getType().name();
         }
-        String rawType = getLunixDataContainer(item).getString("id");
-        try {
-            return LunixItemType.valueOf(rawType);
-        } catch (IllegalArgumentException ignored) {
-            return null;
+        CompoundTag tag = getLunixDataContainer(item);
+        if (tag.contains("id")) {
+            return tag.getString("id");
+        } else {
+            return item.getType().name();
         }
     }
 

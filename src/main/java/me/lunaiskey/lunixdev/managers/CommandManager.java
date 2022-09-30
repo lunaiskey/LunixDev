@@ -1,8 +1,11 @@
 package me.lunaiskey.lunixdev.managers;
 
-import me.lunaiskey.lunixdev.commands.CommandCraft;
+import me.lunaiskey.lunixdev.commands.CommandLCraft;
+import me.lunaiskey.lunixdev.commands.CommandLEnchant;
 import me.lunaiskey.lunixdev.commands.CommandLItem;
+import me.lunaiskey.lunixdev.commands.CommandLShop;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
 
 public class CommandManager {
 
@@ -11,7 +14,13 @@ public class CommandManager {
     }
 
     private void registerCommands() {
-        Bukkit.getPluginCommand("litem").setExecutor(new CommandLItem());
-        Bukkit.getPluginCommand("craft").setExecutor(new CommandCraft());
+        addCommand("litem",new CommandLItem());
+        addCommand("lcraft",new CommandLCraft());
+        addCommand("lshop",new CommandLShop());
+        addCommand("lenchant", new CommandLEnchant());
+    }
+
+    private void addCommand(String name, CommandExecutor executor) {
+        Bukkit.getPluginCommand(name).setExecutor(executor);
     }
 }

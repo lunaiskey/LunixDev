@@ -1,9 +1,11 @@
 package me.lunaiskey.lunixdev.lunixitems.items;
 
-import me.lunaiskey.lunixdev.lunixitems.LunixItem;
-import me.lunaiskey.lunixdev.lunixitems.LunixItemType;
+import me.lunaiskey.lunixdev.LunixDev;
 import me.lunaiskey.lunixdev.lunixitems.Rarity;
+import me.lunaiskey.lunixdev.lunixitems.types.LunixItem;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -11,9 +13,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.List;
 
-public class Coal extends LunixItem {
-    public Coal() {
-        super(LunixItemType.COAL, "Coal", List.of("&7&oOne of your 5 a day!"), Rarity.COMMON, Material.COAL);
+public class TestItem extends LunixItem {
+    public TestItem() {
+        super("TEST_ITEM", "Test Item Please Ignore", List.of("&7Does Stuff."), Rarity.LEGENDARY, Material.STICK, true);
     }
 
     @Override
@@ -28,7 +30,10 @@ public class Coal extends LunixItem {
 
     @Override
     public void onInteract(PlayerInteractEvent e) {
-
+        final Player player = e.getPlayer();
+        Bukkit.getScheduler().scheduleSyncDelayedTask(LunixDev.getLunixDev(),()->player.giveExpLevels(1),40L);
+        //player.giveExpLevels(1);
+        player.sendMessage("Given 1 level.");
     }
 
     @Override
